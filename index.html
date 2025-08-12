@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardArt</title>
+<link rel="icon" type="image/png" href="ooo.png">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #4e54c8, #8f94fb);
+        color: #fff;
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        flex-wrap: wrap;
+    }
+    nav button {
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: none;
+        background: linear-gradient(90deg, #ff9966, #ff5e62);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+    nav button:hover, .animated-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+    }
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    .tab {
+        display: none;
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        animation: fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+    .card-animate {
+        width: 340px;
+        height: 200px;
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+        animation: floatCard 2s infinite alternate;
+        background: linear-gradient(135deg, #ff9966, #ff5e62);
+    }
+    @keyframes floatCard {
+        0% { transform: translateY(0px) rotate(-2deg);}
+        100% { transform: translateY(-12px) rotate(2deg);}
+    }
+    form {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(15px);
+    }
+    form label {
+        display: block;
+        margin: 10px 0 5px;
+    }
+    form input, form select, form textarea {
+        width: 100%;
+        padding: 8px;
+        border: none;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+    .animated-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #ff9966, #ff5e62);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        animation: pulse 2s infinite;
+        transition: all 0.3s ease;
+        display: inline-block;
+        margin: 5px;
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <button onclick="showTab('home')">🏠 Home</button>
+    <button onclick="showTab('upgrade')">⬆ Upgrade Card</button>
+    <button onclick="showTab('create')">➕ Create Card</button>
+    <button onclick="showTab('about')">ℹ About</button>
+    <button onclick="showTab('contact')">📞 Contact Us</button>
+</nav>
+
+<!-- Home -->
+<section id="home" class="tab" style="display: block;">
+    <div style="text-align:center;">
+        <div class="card-animate">
+            <div style="position:absolute; top:20px; left:30px; font-size:1.2em;">CardArt</div>
+            <div style="position:absolute; bottom:30px; left:30px; font-size:1.1em;">**** **** **** 1234</div>
+            <div style="position:absolute; bottom:30px; right:30px; font-size:0.9em;">VALID 12/29</div>
+        </div>
+        <h2>Welcome to CardArt</h2>
+        <p>Create or upgrade your debit/credit card with ease and style!</p>
+    </div>
+</section>
+
+<!-- Upgrade Card -->
+<section id="upgrade" class="tab">
+    <h2>Upgrade Your Card</h2>
+    <p>Upgrade your debit or credit card to enjoy more benefits and features.</p>
+    <button class="animated-btn" onclick="showCardOptions('upgrade')">Upgrade Card</button>
+    <div id="upgrade-options" style="margin-top:20px; display:none;">
+        <button class="animated-btn" onclick="showForm('debit', 'upgrade')">Debit Card</button>
+        <button class="animated-btn" onclick="showForm('credit', 'upgrade')">Credit Card</button>
+    </div>
+    <form id="upgrade-form" style="display:none;" onsubmit="event.preventDefault(); alert('Upgrade request submitted! After 15 Days'); resetForms();">
+        <div id="upgrade-form-fields"></div>
+        <button type="submit" class="animated-btn">Submit</button>
+    </form>
+</section>
+
+<!-- Create Card -->
+<section id="create" class="tab">
+    <h2>Create a New Card</h2>
+    <p>Select card type to start the creation process.</p>
+    <button class="animated-btn" onclick="showCardOptions('create')">Create Card</button>
+    <div id="create-options" style="margin-top:20px; display:none;">
+        <button class="animated-btn" onclick="showForm('debit', 'create')">Debit Card</button>
+        <button class="animated-btn" onclick="showForm('credit', 'create')">Credit Card</button>
+    </div>
+    <form id="create-form" style="display:none;" onsubmit="event.preventDefault(); alert('Card created successfully! Card deliver After 20 Days'); resetForms();">
+        <div id="create-form-fields"></div>
+        <button type="submit" class="animated-btn">Submit</button>
+    </form>
+</section>
+
+<!-- About -->
+<section id="about" class="tab">
+    <h2>About CardArt</h2>
+    <p>
+        <strong>CardArt</strong> is your one-stop platform for creating, customizing, and upgrading 
+        <strong>debit or credit cards</strong> with style and convenience. 
+        Our goal is to make <strong>card management</strong> simple, secure, and enjoyable for everyone.
+    </p>
+
+    <h3>What We Offer</h3>
+    <ul>
+        <li>🎨 <strong>Card Creation</strong> – Easily design and personalize your own debit or credit card with unique styles and themes.</li>
+        <li>⬆ <strong>Card Upgrade</strong> – Upgrade your existing card with new features, designs, or benefits in just a few clicks.</li>
+        <li>🛡 <strong>Security First</strong> – All card processes are handled with the highest level of encryption and safety standards.</li>
+        <li>💳 <strong>Multi-Card Options</strong> – Choose from debit, credit, or virtual cards based on your needs.</li>
+        <li>⚡ <strong>Fast & Easy Process</strong> – Complete the card creation or upgrade process quickly without long forms or delays.</li>
+    </ul>
+
+    <h3>Our Mission</h3>
+    <ol>
+        <li><strong>Simplify</strong> the way you create and manage cards.</li>
+        <li><strong>Secure</strong> your transactions and personal details.</li>
+        <li><strong>Empower</strong> you with creative control over your card’s look and features.</li>
+        <li><strong>Enhance</strong> the overall banking and payment experience.</li>
+    </ol>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="tab">
+    <h2>Contact Us</h2>
+    <p>We’d love to hear from you! Fill in the form below and we’ll get back to you.</p>
+    <form onsubmit="event.preventDefault(); alert('Message sent!'); this.reset();">
+        <label>Name:</label>
+        <input type="text" required>
+        <label>Email:</label>
+        <input type="email" required>
+        <label>Message:</label>
+        <textarea required></textarea>
+        <button type="submit" class="animated-btn">Send Message</button>
+    </form>
+</section>
+
+<script>
+function showTab(tab) {
+    document.querySelectorAll('.tab').forEach(s => s.style.display = 'none');
+    document.getElementById(tab).style.display = 'block';
+    resetForms();
+}
+function showCardOptions(section) {
+    document.getElementById(section + '-options').style.display = 'block';
+    document.getElementById(section + '-form').style.display = 'none';
+}
+function showForm(type, section) {
+    const fields = `
+        <label>Name:</label><input type="text" required>
+        <label>Email:</label><input type="email" required>
+        <label>Password:</label><input type="password" required>
+        <label>PAN Card No:</label><input type="text" required>
+        <label>Aadhar No:</label><input type="text" required>
+        <label>Card No:</label><input type="text" required>
+        <label>Card Holder Name:</label><input type="text" required>
+    `;
+    document.getElementById(section + '-form-fields').innerHTML = fields;
+    document.getElementById(section + '-form').style.display = 'block';
+}
+function resetForms() {
+    ['upgrade', 'create'].forEach(section => {
+        document.getElementById(section + '-options').style.display = 'none';
+        document.getElementById(section + '-form').style.display = 'none';
+    });
+}
+</script>
+</body>
+</html>
